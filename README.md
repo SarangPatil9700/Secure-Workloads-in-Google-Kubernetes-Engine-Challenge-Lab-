@@ -20,14 +20,13 @@ Task 1:
 gcloud container clusters create $CLUSTER_NAME  --machine-type n1-standard-4 --num-nodes 2 --zone us-central1-c --enable-network-policy
 gcloud container clusters get-credentials $CLUSTER_NAME --zone us-central1-c
 
-===========================================!!!===============================
+
 Task 2:
 
 gcloud sql instances create $CLOUD_SQL_INSTANCE_NAME --region=us-central1
 gcloud sql databases create wordpress --instance $CLOUD_SQL_INSTANCE_NAME
 gcloud sql users create wordpress --instance=$CLOUD_SQL_INSTANCE_NAME --host=% --password='P@ssword!'
 
-=============================================!!!==============================
 
 Task 3:
 
@@ -42,7 +41,6 @@ kubectl create secret generic cloudsql-db-credentials \
    --from-literal username=wordpress \
    --from-literal password='P@ssword!'
    
-=============================================!!!=================================
 
 Task 4:
 
@@ -52,9 +50,7 @@ sed -i s/INSTANCE_CONNECTION_NAME/${GOOGLE_CLOUD_PROJECT}:us-central1:$CLOUD_SQL
 
 kubectl apply -f wordpress.yaml
 
-===========================================!!!=============================================
 
-Task 5:
 
 helm upgrade --install ingress-nginx ingress-nginx \
   --repo https://kubernetes.github.io/ingress-nginx
@@ -78,7 +74,7 @@ sed -i s/HOST_NAME/${HOST_NAME}/g ingress.yaml
 
 kubectl apply -f ingress.yaml
 
-===============================================!!!===============================================
+
 Task 6: 
 
 kubectl apply -f network-policy.yaml
@@ -101,10 +97,9 @@ spec:
  ingress:
  - {}
 
-=================================================================
+
 kubectl apply -f network-policy.yaml
 
-=================================================================
 
 gcloud services enable \
    container.googleapis.com \
@@ -112,10 +107,6 @@ gcloud services enable \
    binaryauthorization.googleapis.com
 
 gcloud container clusters update $CLUSTER_NAME --enable-binauthz --zone us-central1-c
-
-
-
-==================================================!!!=====================================================
 
 
 Task 7: 
